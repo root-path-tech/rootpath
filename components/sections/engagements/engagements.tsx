@@ -4,7 +4,6 @@ import * as React from "react";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
@@ -12,6 +11,7 @@ import {
 
 import { GrowIn, useWindow } from "@/components/motion/grow";
 import { Magnetic } from "@/components/motion/magnetic";
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import {
   engagements,
   type Engagement,
@@ -49,7 +49,7 @@ function topWithin(element: HTMLElement, root: HTMLElement) {
 }
 
 export function Engagements() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const reduced = React.useRef(shouldReduceMotion);
   reduced.current = shouldReduceMotion;
 

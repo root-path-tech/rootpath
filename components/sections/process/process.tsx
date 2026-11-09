@@ -4,7 +4,6 @@ import * as React from "react";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
@@ -16,7 +15,10 @@ import {
   resetPointerLight,
   trackPointerLight,
 } from "@/components/motion/pointer-light";
-import { useMediaQuery } from "@/components/motion/use-media-query";
+import {
+  useMediaQuery,
+  usePrefersReducedMotion,
+} from "@/components/motion/use-media-query";
 import {
   stages,
   type Artifact,
@@ -48,7 +50,7 @@ const NODE_X = 34;
 
 export function Process() {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const horizontal = isDesktop && !shouldReduceMotion;
 
   const trackRef = React.useRef<HTMLDivElement>(null);

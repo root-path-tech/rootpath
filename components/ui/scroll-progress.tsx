@@ -1,10 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
+
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 
 /** Hairline reading-progress bar pinned to the top of the viewport. */
 export function ScrollProgress() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 140,

@@ -4,7 +4,6 @@ import * as React from "react";
 import {
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "motion/react";
@@ -219,7 +218,6 @@ export function Hero() {
   const slotRef = React.useRef<HTMLDivElement>(null);
   const nameRef = React.useRef<HTMLParagraphElement>(null);
   const caretRef = React.useRef<HTMLSpanElement>(null);
-  const shouldReduceMotion = useReducedMotion() ?? false;
 
   const [active, setActive] = React.useState(0);
   const [kerns, setKerns] = React.useState<Kerns | null>(null);
@@ -338,11 +336,8 @@ export function Hero() {
 
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <motion.div
-          style={
-            shouldReduceMotion
-              ? undefined
-              : { transform: exit, opacity: exitOpacity }
-          }
+          // Reduced motion: held in place in CSS (.hero-light).
+          style={{ transform: exit, opacity: exitOpacity }}
           className="hero-light absolute inset-0 origin-top"
         >
           {/* Top padding clears the floating navbar (16px offset + 58px bar); the bottom padding

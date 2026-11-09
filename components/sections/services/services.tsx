@@ -1,17 +1,14 @@
 "use client";
 
 import * as React from "react";
-import {
-  AnimatePresence,
-  animate,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-} from "motion/react";
+import { AnimatePresence, animate, motion, useMotionValue } from "motion/react";
 
 import { GrowBand, GrowIn } from "@/components/motion/grow";
 import { Magnetic } from "@/components/motion/magnetic";
-import { useMediaQuery } from "@/components/motion/use-media-query";
+import {
+  useMediaQuery,
+  usePrefersReducedMotion,
+} from "@/components/motion/use-media-query";
 import { PEEK_SVH } from "@/components/sections/hero/data";
 import { services, type Service } from "@/components/sections/services/data";
 import { SystemDiagram } from "@/components/sections/services/diagram";
@@ -398,7 +395,7 @@ function DrawnDiagram({
   service: Service;
   className?: string;
 }) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const progress = useMotionValue(shouldReduceMotion ? 1 : 0);
 
   React.useEffect(() => {

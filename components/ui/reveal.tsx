@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -39,12 +39,13 @@ export function Reveal({
   as = "div",
   ...rest
 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const Tag = motion[as] as typeof motion.div;
 
+  // Reduced motion: shown settled in CSS ([data-reveal]), so it never depends on hydration.
   return (
     <Tag
-      initial={shouldReduceMotion ? false : "hidden"}
+      data-reveal=""
+      initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount, margin: "0px 0px -8% 0px" }}
       variants={revealItem}
@@ -72,11 +73,9 @@ export function Stagger({
   amount = 0.15,
   ...rest
 }: StaggerProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
-
   return (
     <motion.div
-      initial={shouldReduceMotion ? false : "hidden"}
+      initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount, margin: "0px 0px -8% 0px" }}
       variants={group(stagger, delay)}
@@ -95,6 +94,7 @@ export function RevealItem({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <motion.div
+      data-reveal=""
       variants={revealItem}
       className={cn(className)}
       {...(rest as object)}

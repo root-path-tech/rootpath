@@ -5,11 +5,11 @@ import {
   motion,
   useMotionValue,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useSpring,
 } from "motion/react";
 
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import { cn } from "@/lib/utils";
 
 /** What the pointer is over decides how the ring behaves. */
@@ -34,7 +34,7 @@ const follow = { stiffness: 900, damping: 38, mass: 0.35 };
  * in globals.css).
  */
 export function CustomCursor() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const [enabled, setEnabled] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const [mode, setMode] = React.useState<Mode>("idle");
