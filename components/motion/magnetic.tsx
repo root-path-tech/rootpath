@@ -1,13 +1,9 @@
 "use client";
 
 import * as React from "react";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import { cn } from "@/lib/utils";
 
 const settle = { stiffness: 220, damping: 18, mass: 0.6 };
@@ -25,7 +21,7 @@ export function Magnetic({
   className,
   strength = 0.28,
 }: MagneticProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, settle);

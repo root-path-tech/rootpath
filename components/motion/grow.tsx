@@ -3,7 +3,6 @@
 import * as React from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
@@ -43,7 +42,6 @@ export function GrowBand({
   unfoldFrom = 95,
 }: GrowBandProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion() ?? false;
   // Starts with the band's top near the bottom of the viewport, so it is still fully folded as
   // it comes into view and unfolds as it rises.
   const { scrollYProgress: enter } = useScroll({
@@ -69,7 +67,8 @@ export function GrowBand({
       ref={ref}
       data-surface="inverse"
       data-band=""
-      style={shouldReduceMotion ? undefined : { clipPath }}
+      // Reduced motion: unfolded in CSS ([data-band]), so it never depends on hydration.
+      style={{ clipPath }}
       className={cn("relative", className)}
     >
       {children}
@@ -103,7 +102,6 @@ interface GrowInProps {
  */
 export function GrowIn({ children, className, offset }: GrowInProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const progress = useEnterProgress(ref, offset);
   const eased = useTransform(progress, easeOutCubic);
   const y = useTransform(eased, [0, 1], [72, 0]);
@@ -112,12 +110,10 @@ export function GrowIn({ children, className, offset }: GrowInProps) {
 
   return (
     <div ref={ref} className={className}>
+      {/* Reduced motion: settled in CSS ([data-grow-in]), so it never depends on hydration. */}
       <motion.div
-        style={
-          shouldReduceMotion
-            ? undefined
-            : { y, scale, opacity, transformOrigin: "50% 0%" }
-        }
+        data-grow-in=""
+        style={{ y, scale, opacity, transformOrigin: "50% 0%" }}
       >
         {children}
       </motion.div>

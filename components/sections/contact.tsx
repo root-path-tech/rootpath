@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealItem, Stagger } from "@/components/ui/reveal";
 import {
@@ -70,7 +71,7 @@ const fieldClass =
 const errorBorder = "border-[#a3564f]";
 
 export function Contact() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
   const [status, setStatus] = React.useState<Status>("idle");
   const [requestType, setRequestType] = React.useState<RequestType>("Quote");
   const [service, setService] = React.useState("");

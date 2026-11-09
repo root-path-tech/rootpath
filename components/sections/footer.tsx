@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 
 import { GrowBand } from "@/components/motion/grow";
 import {
   resetPointerLight,
   trackPointerLight,
 } from "@/components/motion/pointer-light";
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import { CliSignature, LogoMark } from "@/components/ui/logo";
 import { Reveal } from "@/components/ui/reveal";
 import { sectionLinks } from "@/lib/nav";
@@ -57,7 +58,7 @@ function IndexPanel() {
 }
 
 export function Footer() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   return (
     <GrowBand foldOut={false}>

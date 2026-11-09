@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
+import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import { Button } from "@/components/ui/button";
 import { LogoMark } from "@/components/ui/logo";
 import { goToContact } from "@/lib/contact";
@@ -61,7 +62,7 @@ export function Navbar() {
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [mobileShellOpen, setMobileShellOpen] = React.useState(false);
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   const closeMobileMenu = () => setMobileOpen(false);
   const toggleMobileMenu = () => {

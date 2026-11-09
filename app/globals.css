@@ -690,4 +690,19 @@ a {
     border-radius: 0;
     animation: none;
   }
+
+  /*
+   * Scroll-linked and entrance effects rest in their settled state. These override the inline
+   * styles motion writes, and apply from first paint, so nothing waits on hydration.
+   */
+  [data-band] {
+    clip-path: none !important;
+  }
+
+  [data-grow-in],
+  [data-reveal],
+  .hero-light {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

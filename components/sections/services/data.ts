@@ -1,14 +1,19 @@
 import type { DiagramDefinition } from "@/components/sections/services/diagram";
 
 export interface Service {
-  /** Matches the hero system map node, which links to `#service-${id}`. */
+  /** Anchors the row at `#service-${id}`, linked from llms.txt and the structured data. */
   id: "web" | "mobile" | "cloud" | "consult";
   path: string;
   name: string;
+  /** The one line shown under the name in the services index. */
+  summary: string;
   title: string;
   description: string;
   tags: string[];
-  /** How the work is done, in the terms a technical reviewer would look for. */
+  /**
+   * How the work is done, in the terms a technical reviewer would look for. Listed in
+   * llms.txt; kept off the page so the services read at a glance.
+   */
   practices: string[];
   diagram: DiagramDefinition;
 }
@@ -495,6 +500,8 @@ export const services: Service[] = [
     id: "web",
     path: "/web",
     name: "Web development",
+    summary:
+      "Marketing sites to enterprise platforms, built for the next release.",
     title: "Web platforms built for the next release",
     description:
       "From marketing sites to enterprise platforms, we make the structure, content, and performance work together.",
@@ -512,6 +519,8 @@ export const services: Service[] = [
     id: "mobile",
     path: "/mobile",
     name: "Mobile app development",
+    summary:
+      "Core flows shaped and built for iOS and Android, native or cross-platform.",
     title: "Mobile apps with a clear path from screen to screen",
     description:
       "We shape the core flows and build the app for iOS, Android, React Native, or Flutter.",
@@ -528,6 +537,8 @@ export const services: Service[] = [
     id: "cloud",
     path: "/cloud",
     name: "Cloud and API engineering",
+    summary:
+      "Clear APIs, infrastructure and integrations, without the black box.",
     title: "APIs and infrastructure without the black box",
     description:
       "Clear APIs, infrastructure, and integrations for products that need to move without unnecessary complexity.",
@@ -554,6 +565,8 @@ export const services: Service[] = [
     id: "consult",
     path: "/consult",
     name: "Technical consulting",
+    summary:
+      "Architecture reviews, legacy modernization and a clear next move.",
     title: "Turn technical complexity into a clear next move",
     description:
       "Architecture reviews, legacy modernization, and product strategy for teams deciding what to build next.",
