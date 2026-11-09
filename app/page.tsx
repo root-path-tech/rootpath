@@ -6,6 +6,10 @@
  *
  * - "1,600 Free Illustrations: Vector illustrations set (svg, png)" by Streamline
  *   (https://www.streamlinehq.com), via the Figma Community.
+ * - "SVG Abstract Patterns & Illustrations Library" by Pavan Kondapuram, via the Figma
+ *   Community.
+ * - "1000 textures", via the Figma Community
+ *   (https://www.figma.com/community/file/1370508545199042511).
  */
 
 import type { Metadata } from "next";
