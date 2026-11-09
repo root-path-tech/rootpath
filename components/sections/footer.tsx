@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { motion } from "motion/react";
 
 import { GrowBand } from "@/components/motion/grow";
@@ -8,6 +9,7 @@ import {
   trackPointerLight,
 } from "@/components/motion/pointer-light";
 import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
+import { FooterTerrain } from "@/components/sections/footer-terrain";
 import { CliSignature, LogoMark } from "@/components/ui/logo";
 import { Reveal } from "@/components/ui/reveal";
 import { sectionLinks } from "@/lib/nav";
@@ -20,9 +22,10 @@ const spring = {
 };
 
 /** The page index as a terminal panel, in the same frame as the Services and Process stages. */
-function IndexPanel() {
+function IndexPanel({ ref }: { ref?: React.Ref<HTMLElement> }) {
   return (
     <nav
+      ref={ref}
       aria-label="Footer navigation"
       onPointerMove={trackPointerLight}
       onPointerLeave={resetPointerLight}
@@ -59,10 +62,24 @@ function IndexPanel() {
 
 export function Footer() {
   const shouldReduceMotion = usePrefersReducedMotion();
+  const footerRef = React.useRef<HTMLElement>(null);
+  const ctaRef = React.useRef<HTMLAnchorElement>(null);
+  const panelRef = React.useRef<HTMLElement>(null);
+  const floorRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <GrowBand foldOut={false}>
-      <footer id="footer" className="footer-light relative overflow-hidden">
+      <footer
+        ref={footerRef}
+        id="footer"
+        className="footer-light relative overflow-hidden"
+      >
+        <FooterTerrain
+          rootRef={footerRef}
+          copyRef={ctaRef}
+          targetRef={panelRef}
+          floorRef={floorRef}
+        />
         <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-10 lg:py-32">
           <div className="grid gap-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(17rem,0.55fr)] lg:items-end lg:gap-20">
             <Reveal>
@@ -75,6 +92,7 @@ export function Footer() {
                 that needs a sharper path.
               </p>
               <motion.a
+                ref={ctaRef}
                 href="#process"
                 initial="rest"
                 whileHover={shouldReduceMotion ? undefined : "hover"}
@@ -97,11 +115,14 @@ export function Footer() {
             </Reveal>
 
             <Reveal as="aside" delay={0.1}>
-              <IndexPanel />
+              <IndexPanel ref={panelRef} />
             </Reveal>
           </div>
 
-          <div className="mt-20 grid gap-6 border-t border-border pt-8 sm:mt-24 md:grid-cols-[1fr_auto] md:items-end">
+          <div
+            ref={floorRef}
+            className="mt-20 grid gap-6 border-t border-border pt-8 sm:mt-24 md:grid-cols-[1fr_auto] md:items-end"
+          >
             <div className="flex flex-col gap-3">
               <a
                 href="#top"
