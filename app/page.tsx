@@ -10,6 +10,8 @@
  *   Community.
  * - "1000 textures", via the Figma Community
  *   (https://www.figma.com/community/file/1370508545199042511).
+ * - "Background Grid patterns for website design || Grids", via the Figma Community.
+ * - "Crazy Beautiful Complex Gradients", via the Figma Community.
  */
 
 import type { Metadata } from "next";
