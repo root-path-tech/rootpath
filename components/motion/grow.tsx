@@ -69,7 +69,7 @@ export function GrowBand({
       data-band=""
       // Reduced motion: unfolded in CSS ([data-band]), so it never depends on hydration.
       style={{ clipPath }}
-      className={cn("relative", className)}
+      className={cn("relative isolate", className)}
     >
       {children}
     </motion.div>

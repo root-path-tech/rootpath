@@ -162,38 +162,19 @@ h3 {
 
 /*
  * Topographic contour lines (public/textures/contours.svg), painted in the surface's accent. The
- * SVG is a mask, so one file serves every surface; --contour-fade is a second mask that keeps the
- * lines quiet behind copy.
+ * SVG is a mask, so one file serves every surface. The lines drift and flip inside a still
+ * .terrain-fade layer, whose gradient (--contour-fade) keeps them clear of copy
+ * (see components/motion/terrain.tsx).
  */
 .contour-field {
   background-color: var(--accent);
-  -webkit-mask-image:
-    url("/textures/contours.svg"), var(--contour-fade, linear-gradient(#000, #000));
-  -webkit-mask-composite: source-in;
-  mask-image:
-    url("/textures/contours.svg"), var(--contour-fade, linear-gradient(#000, #000));
-  mask-composite: intersect;
-  mask-size: cover, 100% 100%;
-  mask-position: center;
-  mask-repeat: no-repeat;
+  -webkit-mask: url("/textures/contours.svg") center / cover no-repeat;
+  mask: url("/textures/contours.svg") center / cover no-repeat;
 }
 
-/* Footer: the lines gather towards the routes panel and fall away behind the headline. */
-.footer-contours {
-  --contour-fade: radial-gradient(
-    ellipse 75% 95% at 82% 78%,
-    #000 30%,
-    transparent 82%
-  );
-}
-
-/* 404: the terrain sits around the dead-end route on the right, clear of the copy. */
-.not-found-contours {
-  --contour-fade: radial-gradient(
-    ellipse 70% 100% at 84% 62%,
-    #000 25%,
-    transparent 80%
-  );
+.terrain-fade {
+  -webkit-mask-image: var(--contour-fade, linear-gradient(#000, #000));
+  mask-image: var(--contour-fade, linear-gradient(#000, #000));
 }
 
 /* A route drawn across the contours on load: the line traces in, then its stops appear. */
@@ -764,6 +745,15 @@ a {
   .hero-light {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* The terrain holds still. */
+  [data-terrain] {
+    transform: none !important;
+  }
+
+  [data-terrain][data-flip] {
+    transform: scaleX(-1) !important;
   }
 
   /* Routes are drawn in full, with every stop showing. */

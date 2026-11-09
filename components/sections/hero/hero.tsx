@@ -22,6 +22,8 @@ import {
   measureKerning,
   type Kerning,
 } from "@/components/sections/hero/kerning";
+import { Terrain } from "@/components/motion/terrain";
+import { HeroRoute } from "@/components/sections/hero/hero-route";
 import { useScrollStops } from "@/components/sections/hero/use-scroll-stops";
 import { Button } from "@/components/ui/button";
 import { goToContact } from "@/lib/contact";
@@ -340,6 +342,15 @@ export function Hero() {
           style={{ transform: exit, opacity: exitOpacity }}
           className="hero-light absolute inset-0 origin-top"
         >
+          {/* Contours ring the stage and leave its centre clear for the statement. */}
+          <Terrain
+            className="-z-10"
+            fade="radial-gradient(ellipse 58% 52% at 50% 46%, transparent 42%, #000 100%)"
+            opacity={0.12}
+            progress={scrollYProgress}
+            driftY={[0, -5]}
+          />
+          <HeroRoute peek={PEEK_SVH} />
           {/* Top padding clears the floating navbar (16px offset + 58px bar); the bottom padding
               clears the band peeking up from below and lifts the column to the optical centre. */}
           <div

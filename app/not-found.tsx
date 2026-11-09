@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Terrain } from "@/components/motion/terrain";
 import { MissingPath } from "@/components/sections/missing-path";
 import { LogoMark } from "@/components/ui/logo";
 import { sectionLinks } from "@/lib/nav";
@@ -72,9 +73,11 @@ export default function NotFound() {
       data-surface="inverse"
       className="relative flex min-h-[100svh] flex-col overflow-hidden bg-background text-foreground"
     >
-      <div
-        aria-hidden="true"
-        className="not-found-contours contour-field pointer-events-none absolute inset-0 opacity-[0.16]"
+      {/* The terrain sits around the dead-end route on the right, clear of the copy. */}
+      <Terrain
+        fade="radial-gradient(ellipse 70% 100% at 84% 62%, #000 25%, transparent 80%)"
+        opacity={0.16}
+        driftY={[0, 0]}
       />
       <DeadEnd />
 

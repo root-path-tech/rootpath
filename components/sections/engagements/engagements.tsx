@@ -11,6 +11,7 @@ import {
 
 import { GrowIn, useWindow } from "@/components/motion/grow";
 import { Magnetic } from "@/components/motion/magnetic";
+import { Terrain } from "@/components/motion/terrain";
 import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import {
   engagements,
@@ -113,8 +114,14 @@ export function Engagements() {
     <section
       id="engagements"
       aria-labelledby="engagements-heading"
-      className="mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pb-28 sm:pt-28 lg:px-10 lg:pb-32 lg:pt-36"
+      className="relative isolate mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pb-28 sm:pt-28 lg:px-10 lg:pb-32 lg:pt-36"
     >
+      {/* Contours along the right edge of the page, beside the lanes. */}
+      <Terrain
+        className="-z-10 left-1/2 right-auto w-screen -translate-x-1/2"
+        fade="radial-gradient(ellipse 38% 55% at 100% 32%, #000 10%, transparent 80%)"
+        opacity={0.1}
+      />
       <GrowIn offset={["start 95%", "start 45%"]}>
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-16">
           <div>

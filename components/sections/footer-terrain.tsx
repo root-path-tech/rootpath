@@ -8,6 +8,7 @@ import {
   type MotionValue,
 } from "motion/react";
 
+import { Terrain } from "@/components/motion/terrain";
 import { routePath, type Point } from "@/components/sections/services/diagram";
 
 interface FooterTerrainProps {
@@ -93,7 +94,6 @@ export function FooterTerrain({
     target: rootRef,
     offset: ["start end", "end end"],
   });
-  const drift = useTransform(scrollYProgress, [0, 1], ["-5%", "0%"]);
   const drawn = useTransform(scrollYProgress, [0.45, 0.95], [0, 1], {
     clamp: true,
   });
@@ -121,10 +121,12 @@ export function FooterTerrain({
 
   return (
     <>
-      <motion.div
-        aria-hidden="true"
-        style={{ y: drift }}
-        className="footer-contours contour-field pointer-events-none absolute -inset-y-[8%] inset-x-0 opacity-[0.16]"
+      {/* The lines gather towards the routes panel and fall away behind the headline. */}
+      <Terrain
+        fade="radial-gradient(ellipse 75% 95% at 82% 78%, #000 30%, transparent 82%)"
+        opacity={0.16}
+        progress={scrollYProgress}
+        driftY={[-5, 0]}
       />
       {geometry ? (
         <svg

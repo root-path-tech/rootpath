@@ -3,6 +3,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { Terrain } from "@/components/motion/terrain";
 import { usePrefersReducedMotion } from "@/components/motion/use-media-query";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealItem, Stagger } from "@/components/ui/reveal";
@@ -186,8 +187,15 @@ export function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="mx-auto max-w-7xl border-t border-border px-6 py-20 sm:py-24 lg:px-10 lg:py-28"
+      className="relative isolate mx-auto max-w-7xl border-t border-border px-6 py-20 sm:py-24 lg:px-10 lg:py-28"
     >
+      {/* Contours in the corner under the intro column, clear of the form. */}
+      <Terrain
+        className="-z-10 left-1/2 right-auto w-screen -translate-x-1/2"
+        fade="radial-gradient(ellipse 45% 60% at 0% 100%, #000 10%, transparent 80%)"
+        opacity={0.1}
+        flip
+      />
       <div className="grid gap-12 lg:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
         <Reveal className="self-start lg:sticky lg:top-28">
           <p className="eyebrow">04 · Contact</p>

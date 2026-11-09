@@ -11,6 +11,7 @@ import {
 
 import { GrowBand, GrowIn } from "@/components/motion/grow";
 import { Magnetic } from "@/components/motion/magnetic";
+import { Terrain } from "@/components/motion/terrain";
 import {
   resetPointerLight,
   trackPointerLight,
@@ -138,6 +139,16 @@ export function Process() {
                 "sticky top-0 flex h-[100svh] items-center overflow-hidden pt-[4.5rem]",
             )}
           >
+            {/* Contours along the bottom of the stage, drifting slower than the cards. */}
+            {horizontal ? (
+              <Terrain
+                className="-z-10"
+                fade="radial-gradient(ellipse 85% 55% at 65% 100%, #000 15%, transparent 80%)"
+                progress={scrollYProgress}
+                driftX={[0, -8]}
+                driftY={[0, 0]}
+              />
+            ) : null}
             <motion.div
               ref={rowRef}
               style={horizontal ? { x } : undefined}

@@ -5,6 +5,7 @@ import { AnimatePresence, animate, motion, useMotionValue } from "motion/react";
 
 import { GrowBand, GrowIn } from "@/components/motion/grow";
 import { Magnetic } from "@/components/motion/magnetic";
+import { Terrain } from "@/components/motion/terrain";
 import {
   useMediaQuery,
   usePrefersReducedMotion,
@@ -72,6 +73,12 @@ export function Services() {
   return (
     // Its folded top already shows under the pinned hero, so it unfolds from that height.
     <GrowBand unfoldFrom={100 - PEEK_SVH}>
+      {/* Contours gather in the top corner, away from the index and the panel. */}
+      <Terrain
+        className="-z-10"
+        fade="radial-gradient(ellipse 55% 50% at 100% 0%, #000 15%, transparent 80%)"
+        flip
+      />
       <section
         id="services"
         aria-labelledby="services-heading"
