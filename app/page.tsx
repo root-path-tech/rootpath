@@ -1,3 +1,13 @@
+/*
+ * Asset credits
+ *
+ * Third-party illustrations and graphics available to this site, by source. Add a line for
+ * each new source.
+ *
+ * - "1,600 Free Illustrations: Vector illustrations set (svg, png)" by Streamline
+ *   (https://www.streamlinehq.com), via the Figma Community.
+ */
+
 import type { Metadata } from "next";
 
 import { Contact } from "@/components/sections/contact";
